@@ -482,7 +482,7 @@ namespace SimpleRPG
 
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (stats.Length / 2)) + "}", stats));
             Console.WriteLine($"Hero Name: {Name} \nHero Race: {Race} \n\nFinal Player Stats:");
-            Console.Write($"Current Level: {CurrentLevel} \nCurrent Experience{ExpEarned}/{NextLevelExp}");
+            Console.Write($"Current Level: {CurrentLevel} \nCurrent Experience: {ExpEarned}/{NextLevelExp}");
             Console.Write($"\nHealth Remaining: {HealthCurrent}/{HealthFull} \nStrength: {Strength} \nVitality: {Vitality} \nAgility: {Agility}");
             Console.Write($"\n\nBattle Stats: \nDungeon Difficulty: {DungeonName} \nDungeon Position Reached: {DungeonPosition} \nTotal Battles: {BattlesWon} \nTimes You Ran: {RanAway}");
             Console.Write($"\nGoblins Fought: {GoblinsFought} \nSkeletons Fought: {SkeletonsFought} \nDragons Fought: {DragonsFought}");
