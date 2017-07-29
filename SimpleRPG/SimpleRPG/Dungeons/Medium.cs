@@ -232,6 +232,7 @@ namespace SimpleRPG
                         {
                             HealthCurrent = HealthFull;
                         }
+                        PotionCount--;
                         BeginDunegon();
                         return;
                     }
@@ -418,6 +419,7 @@ namespace SimpleRPG
                     if (HealthCurrent == HealthFull)
                     {
                         Console.WriteLine("Health is Full, You Cannot Use a Potion!");
+                        PotionCount--;
                         Fight();
                         return;
                     }
@@ -435,6 +437,7 @@ namespace SimpleRPG
                             Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
                             Console.ReadLine();
                         }
+                        PotionCount--;
                         Fight();
                         return;
                     }
