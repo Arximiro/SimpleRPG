@@ -226,13 +226,13 @@ namespace SimpleRPG
                     {
                         if (HealthCurrent < HealthFull)
                         {
-                            Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
-                            Console.ReadLine();
                             HealthCurrent = HealthCurrent + PotionHealAmt;
                             if (HealthCurrent > HealthFull)
                             {
                                 HealthCurrent = HealthFull;
                             }
+                            Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
+                            Console.ReadLine();
                             PotionCount--;
                             BeginDunegon();
                             return;
@@ -248,6 +248,7 @@ namespace SimpleRPG
                     else
                     {
                         Console.WriteLine("You Have No Potions!");
+                        Console.ReadLine();
                         BeginDunegon();
                         return;
                     }
