@@ -231,6 +231,7 @@ namespace SimpleRPG
                         {
                             HealthCurrent = HealthFull;
                         }
+                        PotionCount--;
                         BeginDunegon();
                         return;
                     }
