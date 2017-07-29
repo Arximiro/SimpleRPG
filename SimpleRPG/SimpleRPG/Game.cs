@@ -16,7 +16,7 @@ namespace SimpleRPG
             Console.Clear();
             Console.WriteLine("Welcome to Simple RPG");
             Console.WriteLine("\nChoose Your Dungeon:");
-            Console.Write("\n(1) Easy \n(2) Normal \n(3) Hard \n(4) Random \nEnter Your Choice: ");
+            Console.Write("\n(1) Easy \n(2) Medium \n(3) Hard \n(4) Random \nEnter Your Choice: ");
             choice = Console.ReadLine();
 
             if (choice == "1")

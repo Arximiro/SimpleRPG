@@ -216,32 +216,42 @@ namespace SimpleRPG
                 Console.WriteLine($"Current Position in {DungeonName}: {DungeonPosition}");
                 Console.WriteLine($"Health Remaining: {HealthCurrent}/{HealthFull} ");
                 Console.WriteLine($"Potions Remaining: {PotionCount}");
-                Console.WriteLine("\nPress Enter to Advance One Position or (P) to use a Potion.");
+                Console.Write("\nPress Enter to Advance One Position or (P) to use a Potion: ");
                 choice = Console.ReadLine().ToUpper();
 
                 if (choice == "P")
                 {
-                    if (HealthCurrent < HealthFull)
+                    if (PotionCount > 0)
                     {
-                        Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
-                        Console.ReadLine();
-                        HealthCurrent = HealthCurrent + PotionHealAmt;
-                        PotionCount--;
-                        if (HealthCurrent > HealthFull)
+                        if (HealthCurrent < HealthFull)
                         {
-                            HealthCurrent = HealthFull;
+                            Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
+                            Console.ReadLine();
+                            HealthCurrent = HealthCurrent + PotionHealAmt;
+                            if (HealthCurrent > HealthFull)
+                            {
+                                HealthCurrent = HealthFull;
+                            }
+                            PotionCount--;
+                            BeginDunegon();
+                            return;
                         }
-                        PotionCount--;
-                        BeginDunegon();
-                        return;
+                        else if (HealthCurrent == HealthFull)
+                        {
+                            Console.WriteLine("Health is Full, You Cannot Use a Potion!");
+                            Console.ReadLine();
+                            BeginDunegon();
+                            return;
+                        }
                     }
-                    else if (HealthCurrent == HealthFull)
+                    else
                     {
-                        Console.WriteLine("Health is Full, You Cannot Use a Potion!");
+                        Console.WriteLine("You Have No Potions!");
                         Console.ReadLine();
                         BeginDunegon();
                         return;
                     }
+
                 }
 
 
@@ -280,7 +290,7 @@ namespace SimpleRPG
                 }
                 else
                 {
-                    Console.WriteLine("You Sucessfully Moved Up One Position Safely.");
+                    Console.WriteLine("\nYou Sucessfully Moved Up One Position Safely.");
                     Console.ReadLine();
                     DungeonPosition++;
                     BeginDunegon();
@@ -418,13 +428,13 @@ namespace SimpleRPG
                     if (HealthCurrent == HealthFull)
                     {
                         Console.WriteLine("Health is Full, You Cannot Use a Potion!");
-                        PotionCount--;
                         Fight();
                         return;
                     }
                     else if (HealthCurrent < HealthFull)
                     {
                         HealthCurrent = HealthCurrent + PotionHealAmt;
+                        PotionCount--;
                         if (HealthCurrent > HealthFull)
                         {
                             HealthCurrent = HealthFull;
@@ -436,7 +446,6 @@ namespace SimpleRPG
                             Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
                             Console.ReadLine();
                         }
-                        PotionCount--;
                         Fight();
                         return;
                     }
@@ -444,6 +453,7 @@ namespace SimpleRPG
                 else
                 {
                     Console.WriteLine("You Have No Potions!");
+                    Console.ReadLine();
                     Fight();
                     return;
                 }
@@ -485,12 +495,12 @@ namespace SimpleRPG
 
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (stats.Length / 2)) + "}", stats));
             Console.WriteLine($"Hero Name: {Name} \nHero Race: {Race} \n\nFinal Player Stats:");
-            Console.Write($"Current Level: {CurrentLevel} \nCurrent Experience: {ExpEarned}/{NextLevelExp}");
+            Console.Write($"Level: {CurrentLevel} \nExperience: {ExpEarned}/{NextLevelExp}");
             Console.Write($"\nHealth Remaining: {HealthCurrent}/{HealthFull} \nStrength: {Strength} \nVitality: {Vitality} \nAgility: {Agility}");
             Console.Write($"\n\nBattle Stats: \nDungeon Difficulty: {DungeonName} \nDungeon Position Reached: {DungeonPosition} \nTotal Battles: {BattlesWon} \nTimes You Ran: {RanAway}");
             Console.Write($"\nGoblins Fought: {GoblinsFought} \nSkeletons Fought: {SkeletonsFought} \nDragons Fought: {DragonsFought}");
 
-            Console.WriteLine("\nWould you like to play again? (Y) or (N): ");
+            Console.Write("\n\nWould you like to play again? (Y) or (N): ");
             playAgain = Console.ReadLine().ToUpper();
             if (playAgain == "Y")
             {
