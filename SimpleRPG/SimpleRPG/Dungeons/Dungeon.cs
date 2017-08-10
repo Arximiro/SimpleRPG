@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleRPG
 {
-    class Easy : IPlayer, IMonster, IDungeon, IStatistics
+    class Dungeon : IPlayer, IMonster, IDungeon, IStatistics
     {
         //Player Specs
         public string Name { get; set; }
@@ -21,7 +21,7 @@ namespace SimpleRPG
         public string Race { get; set; }
 
 
-        //Monstert Specs
+        //Monster Specs
         public string MName { get; set; }
         public int MHealth { get; set; }
         public int Attack1 { get; set; }
@@ -35,6 +35,10 @@ namespace SimpleRPG
         //Dungeon Specs
         public string DungeonName { get; set; }
         public int DungeonLength { get; set; }
+        public int DungeonDifficulty { get; set; }
+        public int BattleChance { get; set; }
+        public int SkeletonChance { get; set; }
+        public int DragonChance { get; set; }
         public int MonsterDifficulty { get; set; }
         public int PotionCount { get; set; }
         public int PotionHealAmt { get; set; }
@@ -43,6 +47,7 @@ namespace SimpleRPG
 
         //Game Statistics
         public int BattlesWon { get; set; }
+        public int PotionsUsed { get; set; }
         public int GoblinsFought { get; set; }
         public int SkeletonsFought { get; set; }
         public int DragonsFought { get; set; }
@@ -53,8 +58,9 @@ namespace SimpleRPG
         Random RNG = new Random();
         
 
-        public void Play()
+        public void Play(int difficulty)
         {
+            DungeonDifficulty = difficulty;
             Setup();
             BeginDunegon();
 
@@ -62,19 +68,52 @@ namespace SimpleRPG
         public void Setup()
         {
             DungeonPosition = 0;
-            DungeonName = "Easy Dungeon";
-            DungeonLength = 10;
-            PotionCount = 1;
-            PotionHealAmt = RNG.Next(35, 51);
+            PotionHealAmt = RNG.Next(40, 51);
             CurrentLevel = 1;
             NextLevelExp = 350;
-            Console.Clear();
-            Console.WriteLine("You Have Chosen the Easy Dungeon, What a Weakling.");
-            Console.ReadLine();
-            Console.Write("In This Dungeon You Must Move 10 Spaces to Win.");
-            Console.ReadLine();
+            
+            if (DungeonDifficulty == 1)
+            {
+                DungeonName = "Easy Dungeon";
+                DungeonLength = 10;
+                PotionCount = 1;
+                Console.Clear();
+                Console.WriteLine("-------------");
+                Console.WriteLine("EASY DUNGEON");
+                Console.WriteLine("-------------");
+                Console.WriteLine("\nYou Must Advance 10 Spaces to Win. \nBattles are Less Frequent & Enemies are a Bit Easier.");
+                Console.ReadLine();
+            }
+            else if (DungeonDifficulty == 2)
+            {
+                DungeonName = "Medium Dungeon";
+                DungeonLength = 20;
+                PotionCount = 2;
+                Console.Clear();
+                Console.WriteLine("-------------");
+                Console.WriteLine("MEDIUM DUNGEON");
+                Console.WriteLine("-------------");
+                Console.WriteLine("\nYou Must Advance 20 Spaces to Win. \nBattles More Frequent & Enemies are Harder!");
+                Console.ReadLine();
+            }
+            else if (DungeonDifficulty == 3)
+            {
+                DungeonName = "Hard Dungeon";
+                DungeonLength = 30;
+                PotionCount = 3;
+                Console.Clear();
+                Console.WriteLine("-------------");
+                Console.WriteLine("HARD DUNGEON");
+                Console.WriteLine("-------------");
+                Console.WriteLine("\nYou Must Advance 30 Spaces to Win. \nBattles are Even More Frequent & Enemies are Even Harder!");
+                Console.ReadLine();
+                Console.Write("Prepare to Get Fucked!");
+                Console.ReadLine();
+            }
+
             Console.Write("\nEnter Your Name: ");
             Name = Console.ReadLine();
+
             RaceSelection();
         }
         public void RaceSelection()
@@ -112,7 +151,7 @@ namespace SimpleRPG
             }
             else
             {
-                Console.WriteLine("Invalid Choice! Press Enter to Start Over:");
+                Console.Write("Invalid Choice! Press Enter to Start Over: ");
                 Console.ReadLine();
                 RaceSelection();
                 return;
@@ -134,10 +173,26 @@ namespace SimpleRPG
         public void BeginDunegon()
         {
             string choice;
-            
-            int battleChance = RNG.Next(0,6);
-            int dragonChance = RNG.Next(0,6);
-            int skeletonChance = RNG.Next(0,2);
+
+            if (DungeonDifficulty == 1)
+            {
+                BattleChance = RNG.Next(0, 6);
+                SkeletonChance = RNG.Next(0, 3);
+                DragonChance = RNG.Next(0, 6);
+            }
+            else if (DungeonDifficulty == 2)
+            {
+                BattleChance = RNG.Next(0, 5);
+                SkeletonChance = RNG.Next(0, 2);
+                DragonChance = RNG.Next(0, 5);
+            }
+            else if (DungeonDifficulty == 3)
+            {
+                BattleChance = RNG.Next(0, 4);
+                SkeletonChance = RNG.Next(0, 2);
+                DragonChance = RNG.Next(0, 4);
+            }
+
 
             if (ExpEarned > 349 && CurrentLevel < 2)
             {
@@ -204,13 +259,13 @@ namespace SimpleRPG
                 Console.Clear();
             }
 
-            if (DungeonPosition > 9)
+            if (DungeonPosition > DungeonLength - 1)
             {
                 Success();
                 return;
             }
 
-            else if (DungeonPosition < 10)
+            else if (DungeonPosition < DungeonLength)
             {
                 Console.Clear();
                 Console.WriteLine($"Current Position in {DungeonName}: {DungeonPosition}");
@@ -233,6 +288,7 @@ namespace SimpleRPG
                             Console.WriteLine($"{Name} Recovers {PotionHealAmt} Health. \nHealth Remaining: {HealthCurrent}");
                             Console.ReadLine();
                             PotionCount--;
+                            PotionsUsed++;
                             BeginDunegon();
                             return;
                         }
@@ -255,29 +311,29 @@ namespace SimpleRPG
                 }
 
 
-                if (battleChance == 0)
+                if (BattleChance == 0)
                 {
                     MName = "Goblin";
                     MHealth = 45;
                     ExpYield = 200;
-                    PotionChance = RNG.Next(0, 7);
+                    PotionChance = RNG.Next(0, 6);
                     Console.WriteLine($"You encountered a {MName}!!!");
                     Console.ReadLine();
                     GoblinsFought++;
                     Fight();
                 }
-                else if (battleChance == 1 && skeletonChance == 1)
+                else if (BattleChance == 1 && SkeletonChance == 1)
                 {
                     MName = "Skeleton";
                     MHealth = 60;
                     ExpYield = 350;
-                    PotionChance = RNG.Next(0, 5);
+                    PotionChance = RNG.Next(0, 3);
                     Console.WriteLine($"You encountered a {MName}!!!");
                     Console.ReadLine();
                     SkeletonsFought++;
                     Fight();
                 }
-                else if (battleChance == 2 && dragonChance == 1)
+                else if (BattleChance == 2 && DragonChance == 1)
                 {
                     MName = "Dragon";
                     MHealth = 150;
@@ -300,12 +356,29 @@ namespace SimpleRPG
 
         public void Fight()
         {
+            if (DungeonDifficulty == 1)
+            {
+                Attack1 = RNG.Next(43, 54);
+                Attack2 = RNG.Next(44, 76);
+                Attack3 = RNG.Next(36, 75);
+            }
+            else if (DungeonDifficulty == 2)
+            {
+                Attack1 = RNG.Next(45, 62);
+                Attack2 = RNG.Next(50, 68);
+                Attack3 = RNG.Next(41, 82);
+            }
+            else if (DungeonDifficulty == 3)
+            {
+                Attack1 = RNG.Next(50, 70);
+                Attack2 = RNG.Next(55, 85);
+                Attack3 = RNG.Next(45, 90);
+            }
+
             int critChance = RNG.Next(0, 11);
             int strModifier = RNG.Next(-6, 7);
             int dodgeChance = RNG.Next(30, 61);
-            Attack1 = RNG.Next(43, 54);
-            Attack2 = RNG.Next(44, 76);
-            Attack3 = RNG.Next(36, 75);
+
             string battlechoice;
             string battleMSG = "BATTLE IN PROGRESS";
             if (MName == "Goblin") { AttackDamage = Attack1 - Vitality; }
@@ -435,6 +508,7 @@ namespace SimpleRPG
                     {
                         HealthCurrent = HealthCurrent + PotionHealAmt;
                         PotionCount--;
+                        PotionsUsed++;
                         if (HealthCurrent > HealthFull)
                         {
                             HealthCurrent = HealthFull;

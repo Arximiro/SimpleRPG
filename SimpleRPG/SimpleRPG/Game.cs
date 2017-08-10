@@ -8,54 +8,40 @@ namespace SimpleRPG
 {
     class Game
     {
-        string choice;
-        int random;
-
         public void Play()
         {
+            Dungeon Dungeon = new Dungeon();
+            string choice;
+            int random;
+
             Console.Clear();
             Console.WriteLine("Welcome to Simple RPG");
             Console.WriteLine("\nChoose Your Dungeon:");
-            Console.Write("\n(1) Easy \n(2) Medium \n(3) Hard \n(4) Random \nEnter Your Choice: ");
+            Console.Write("\n(1) Easy \n(2) Medium \n(3) Hard \n(4) Random Difficulty \nEnter Your Choice: ");
             choice = Console.ReadLine();
 
             if (choice == "1")
             {
-                Easy Easy = new Easy();
-                Easy.Play();
+                Dungeon.Play(1);
             }
             else if (choice == "2")
             {
-                Medium Medium = new Medium();
-                Medium.Play();
+                Dungeon.Play(2);
             }
             else if (choice == "3")
             {
-                Hard Hard = new Hard();
-                Hard.Play();
+                Dungeon.Play(3);
             }
             else if (choice == "4")
             {
                 Random RNG = new Random();
                 random = RNG.Next(0, 4);
-                if (random == 1)
-                {
-                    Easy Easy = new Easy();
-                    Easy.Play();
-                }
-                else if (random == 2)
-                {
-                    Medium Medium = new Medium();
-                    Medium.Play();
-                }
-                else
-                {
-                    Hard Hard = new Hard();
-                    Hard.Play();
-                }
+                Dungeon.Play(random);
             }
             else
             {
+                Console.Write("\nInvalid Choice!");
+                Console.ReadLine();
                 Play();
             }
 

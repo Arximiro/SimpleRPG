@@ -9,6 +9,7 @@ namespace SimpleRPG
     interface IStatistics
     {
         int BattlesWon { get; set; }
+        int PotionsUsed { get; set; }
         int RanAway { get; set; }
         int GoblinsFought { get; set; }
         int SkeletonsFought { get; set; }

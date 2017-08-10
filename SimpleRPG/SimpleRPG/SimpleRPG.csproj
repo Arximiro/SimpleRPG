@@ -42,14 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dungeons\Easy.cs" />
+    <Compile Include="Dungeons\Dungeon.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Dungeons\Hard.cs" />
-    <Compile Include="IDungeon.cs" />
-    <Compile Include="IMonster.cs" />
-    <Compile Include="IPlayer.cs" />
-    <Compile Include="Dungeons\Medium.cs" />
-    <Compile Include="IStatistics.cs" />
+    <Compile Include="Specifications\IDungeon.cs" />
+    <Compile Include="Specifications\IMonster.cs" />
+    <Compile Include="Specifications\IPlayer.cs" />
+    <Compile Include="Specifications\IStatistics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
