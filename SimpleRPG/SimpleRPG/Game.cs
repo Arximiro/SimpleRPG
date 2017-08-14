@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimpleRPG
 {
-    class Game
+    static class Game
     {
-        public void Play()
+        public static void Play()
         {
-            Dungeon Dungeon = new Dungeon();
+            
             string choice;
             int random;
 
@@ -22,21 +22,21 @@ namespace SimpleRPG
 
             if (choice == "1")
             {
-                Dungeon.Play(1);
+                DungeonSetup.Play(1);
             }
             else if (choice == "2")
             {
-                Dungeon.Play(2);
+                DungeonSetup.Play(2);
             }
             else if (choice == "3")
             {
-                Dungeon.Play(3);
+                DungeonSetup.Play(3);
             }
             else if (choice == "4")
             {
                 Random RNG = new Random();
                 random = RNG.Next(0, 4);
-                Dungeon.Play(random);
+                DungeonSetup.Play(random);
             }
             else
             {
