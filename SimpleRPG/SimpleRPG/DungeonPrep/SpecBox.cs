@@ -6,26 +6,38 @@ using System.Threading.Tasks;
 
 namespace SimpleRPG
 {
-    static class SpecBox
+    public class SpecBox
     {
         //Player Specs
         public static string Name { get; set; }
+        public static string Race { get; set; }
         public static int HealthFull { get; set; }
         public static int HealthCurrent { get; set; }
+
         public static int Strength { get; set; }
         public static int Vitality { get; set; }
         public static int Agility { get; set; }
+
         public static int ExpEarned { get; set; }
         public static int CurrentLevel { get; set; }
         public static int NextLevelExp { get; set; }
-        public static string Race { get; set; }
+        
+        public static int CritChance { get; set; }
+        public static int StrModifier { get; set; }
+        public static int DodgeChance { get; set; } 
 
 
         //Monster Specs
         public static string MName { get; set; }
         public static int MHealth { get; set; }
+
         public static int ExpYield { get; set; }
         public static int PotionChance { get; set; }
+
+        public static int Attack1 { get; set; }
+        public static int Attack2 { get; set; }
+        public static int Attack3 { get; set; }
+        public static int AttackDamage { get; set; }
 
 
         //Dungeon Specs

@@ -10,33 +10,31 @@ namespace SimpleRPG
     {
         public static void Play()
         {
-            
-            string choice;
-            int random;
+            var dungeonSetup = new DungeonSetup();
 
             Console.Clear();
             Console.WriteLine("Welcome to Simple RPG");
             Console.WriteLine("\nChoose Your Dungeon:");
             Console.Write("\n(1) Easy \n(2) Medium \n(3) Hard \n(4) Random Difficulty \nEnter Your Choice: ");
-            choice = Console.ReadLine();
+            string choice = Console.ReadLine();
 
             if (choice == "1")
             {
-                DungeonSetup.Play(1);
+                dungeonSetup.Play(1);
             }
             else if (choice == "2")
             {
-                DungeonSetup.Play(2);
+                dungeonSetup.Play(2);
             }
             else if (choice == "3")
             {
-                DungeonSetup.Play(3);
+                dungeonSetup.Play(3);
             }
             else if (choice == "4")
             {
-                Random RNG = new Random();
-                random = RNG.Next(0, 4);
-                DungeonSetup.Play(random);
+                var rng = new Random();
+                int random = rng.Next(1, 4);
+                dungeonSetup.Play(random);
             }
             else
             {

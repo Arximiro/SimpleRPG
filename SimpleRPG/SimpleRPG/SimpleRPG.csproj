@@ -42,16 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battle.cs" />
-    <Compile Include="DungeonSetup.cs" />
-    <Compile Include="DungeonFlow.cs" />
-    <Compile Include="EndGame.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="LevelManager.cs" />
+    <Compile Include="Actions\Attack.cs" />
+    <Compile Include="GameFlow\Battle.cs" />
+    <Compile Include="GameSettings\MonsterManager.cs" />
+    <Compile Include="GameSettings\BattleManager.cs" />
+    <Compile Include="DungeonPrep\DungeonSetup.cs" />
+    <Compile Include="GameFlow\DungeonFlow.cs" />
+    <Compile Include="GameFlow\EndGame.cs" />
+    <Compile Include="DungeonPrep\Game.cs" />
+    <Compile Include="GameSettings\LevelManager.cs" />
+    <Compile Include="Actions\Potion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecBox.cs" />
-    <Compile Include="StatsPage.cs" />
+    <Compile Include="Actions\Run.cs" />
+    <Compile Include="DungeonPrep\SpecBox.cs" />
+    <Compile Include="GameFlow\StatsPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
